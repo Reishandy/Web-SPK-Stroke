@@ -7,7 +7,6 @@ import {Assessment} from './pages/Assessment';
 import {HistoryDetailView, HistoryList} from './pages/History';
 import {Profile} from './pages/Profile';
 import {Button, Input} from './components/ui';
-// Added Menu and X icons for the mobile sidebar
 import {
     Activity,
     ArrowRight,
@@ -24,7 +23,6 @@ import {
     X
 } from 'lucide-react';
 
-// --- Auth Layout Wrapper (Unchanged) ---
 const AuthLayout: React.FC<{ children: React.ReactNode; title: string; subtitle: string }> = ({
                                                                                                   children,
                                                                                                   title,
@@ -45,6 +43,7 @@ const AuthLayout: React.FC<{ children: React.ReactNode; title: string; subtitle:
                     {children}
                 </div>
             </div>
+
             <div className="hidden lg:flex flex-1 bg-primary-950 relative overflow-hidden items-center justify-center">
                 <div className="absolute inset-0 opacity-20">
                     <div
@@ -56,6 +55,7 @@ const AuthLayout: React.FC<{ children: React.ReactNode; title: string; subtitle:
                         className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"
                         style={{animationDelay: '4s'}}></div>
                 </div>
+
                 <div className="relative z-10 p-12 text-white max-w-lg text-center">
                     <div
                         className="mb-8 inline-flex p-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 ring-1 ring-white/20">
@@ -72,7 +72,6 @@ const AuthLayout: React.FC<{ children: React.ReactNode; title: string; subtitle:
     );
 };
 
-// --- Auth Components (Unchanged) ---
 interface AuthProps {
     onLoginSuccess: (isNewUser?: boolean) => void;
 }
@@ -100,16 +99,34 @@ const Login: React.FC<AuthProps> = ({onLoginSuccess}) => {
     };
 
     return (
-        <AuthLayout title="Welcome back" subtitle="Enter your credentials to access your dashboard.">
+        <AuthLayout
+            title="Welcome back"
+            subtitle="Enter your credentials to access your dashboard."
+        >
             <form className="space-y-5" onSubmit={handleSubmit}>
-                <Input label="Email Address" type="email" required value={email}
-                       onChange={e => setEmail(e.target.value)} placeholder="doctor@hospital.com"
-                       autoComplete="username" icon={<Mail size={18}/>}/>
+                <Input
+                    label="Email Address"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="doctor@hospital.com"
+                    autoComplete="username"
+                    icon={<Mail size={18}/>}
+                />
                 <div className="space-y-1">
-                    <Input label="Password" type="password" required value={password}
-                           onChange={e => setPassword(e.target.value)} placeholder="••••••••"
-                           autoComplete="current-password" icon={<Lock size={18}/>}/>
+                    <Input
+                        label="Password"
+                        type="password"
+                        required
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        placeholder="••••••••"
+                        autoComplete="current-password"
+                        icon={<Lock size={18}/>}
+                    />
                 </div>
+
                 {error && (
                     <div
                         className="p-3 rounded-lg bg-red-50 border border-red-100 text-sm text-red-600 flex items-start gap-2 animate-slide-up">
@@ -117,13 +134,21 @@ const Login: React.FC<AuthProps> = ({onLoginSuccess}) => {
                         <span>{error}</span>
                     </div>
                 )}
+
                 <Button type="submit" className="w-full h-11 text-base shadow-primary-500/25 shadow-lg"
-                        isLoading={loading}>Sign In</Button>
+                        isLoading={loading}>
+                    Sign In
+                </Button>
             </form>
+
             <div className="pt-4 text-center">
-                <p className="text-sm text-slate-500">Don't have an account? <Link to="/register"
-                                                                                   className="font-semibold text-primary-600 hover:text-primary-500 transition-colors">Create
-                    an account</Link></p>
+                <p className="text-sm text-slate-500">
+                    Don't have an account?{' '}
+                    <Link to="/register"
+                          className="font-semibold text-primary-600 hover:text-primary-500 transition-colors">
+                        Create an account
+                    </Link>
+                </p>
             </div>
         </AuthLayout>
     );
@@ -150,32 +175,67 @@ const Register: React.FC<AuthProps> = ({onLoginSuccess}) => {
     };
 
     return (
-        <AuthLayout title="Create an account" subtitle="Start monitoring patient stroke risks today.">
+        <AuthLayout
+            title="Create an account"
+            subtitle="Start monitoring patient stroke risks today."
+        >
             <form className="space-y-5" onSubmit={handleSubmit}>
-                <Input label="Full Name" required value={formData.full_name}
-                       onChange={e => setFormData({...formData, full_name: e.target.value})} placeholder="Dr. John Doe"
-                       autoComplete="name" icon={<UserIcon size={18}/>}/>
-                <Input label="Email Address" type="email" required value={formData.email}
-                       onChange={e => setFormData({...formData, email: e.target.value})} placeholder="name@example.com"
-                       autoComplete="email" icon={<Mail size={18}/>}/>
-                <Input label="Password" type="password" required minLength={8} value={formData.password}
-                       onChange={e => setFormData({...formData, password: e.target.value})}
-                       placeholder="Create a strong password" autoComplete="new-password" icon={<Lock size={18}/>}/>
-                {error && <div
-                    className="p-3 rounded-lg bg-red-50 border border-red-100 text-sm text-red-600 animate-slide-up">{error}</div>}
+                <Input
+                    label="Full Name"
+                    required
+                    value={formData.full_name}
+                    onChange={e => setFormData({...formData, full_name: e.target.value})}
+                    placeholder="Dr. John Doe"
+                    autoComplete="name"
+                    icon={<UserIcon size={18}/>}
+                />
+                <Input
+                    label="Email Address"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={e => setFormData({...formData, email: e.target.value})}
+                    placeholder="name@example.com"
+                    autoComplete="email"
+                    icon={<Mail size={18}/>}
+                />
+                <Input
+                    label="Password"
+                    type="password"
+                    required
+                    minLength={8}
+                    value={formData.password}
+                    onChange={e => setFormData({...formData, password: e.target.value})}
+                    placeholder="Create a strong password"
+                    autoComplete="new-password"
+                    icon={<Lock size={18}/>}
+                />
+
+                {error && (
+                    <div
+                        className="p-3 rounded-lg bg-red-50 border border-red-100 text-sm text-red-600 animate-slide-up">
+                        {error}
+                    </div>
+                )}
+
                 <Button type="submit" className="w-full h-11 text-base shadow-primary-500/25 shadow-lg"
-                        isLoading={loading}>Create Account <ArrowRight size={18} className="ml-2"/></Button>
+                        isLoading={loading}>
+                    Create Account <ArrowRight size={18} className="ml-2"/>
+                </Button>
             </form>
+
             <div className="pt-4 text-center">
-                <p className="text-sm text-slate-500">Already have an account? <Link to="/login"
-                                                                                     className="font-semibold text-primary-600 hover:text-primary-500 transition-colors">Log
-                    in</Link></p>
+                <p className="text-sm text-slate-500">
+                    Already have an account?{' '}
+                    <Link to="/login"
+                          className="font-semibold text-primary-600 hover:text-primary-500 transition-colors">
+                        Log in
+                    </Link>
+                </p>
             </div>
         </AuthLayout>
     );
 };
-
-// --- Layout Component ---
 
 const SidebarLink: React.FC<{ to: string; icon: any; label: string; onClick?: () => void }> = ({
                                                                                                    to,
@@ -208,8 +268,6 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({children}) => {
 
     return (
         <div className="min-h-screen flex flex-col md:flex-row bg-slate-50/50">
-
-            {/* Sidebar (Desktop) */}
             <div
                 className="hidden md:flex flex-col w-72 bg-white border-r border-slate-200 fixed h-full z-20 shadow-[4px_0_24px_-12px_rgba(0,0,0,0.1)]">
                 <div className="p-8 flex items-center gap-3">
@@ -262,15 +320,13 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({children}) => {
             </div>
 
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-50 md:hidden flex">
-                    {/* Backdrop */}
+                <div className="fixed inset-0 z-50 md:hidden flex justify-end">
                     <div
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
+                        className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
 
-                    {/* Sidebar Content */}
-                    <div className="relative w-72 bg-white h-full shadow-2xl flex flex-col animate-slide-right">
+                    <div className="relative w-72 bg-white h-[100dvh] shadow-2xl flex flex-col animate-fade-in">
                         <div className="p-6 flex items-center justify-between border-b border-slate-100">
                             <div className="flex items-center gap-2 font-bold text-slate-900">
                                 <div
@@ -307,7 +363,6 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({children}) => {
                 </div>
             )}
 
-            {/* Main Content */}
             <main className="flex-1 md:ml-72 p-4 md:p-8 max-w-7xl mx-auto w-full relative z-10">
                 <div className="animate-slide-up">
                     {children}
@@ -317,7 +372,6 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({children}) => {
     );
 };
 
-// --- App Routes Wrapper (Unchanged) ---
 function AppRoutes() {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
@@ -371,7 +425,9 @@ function AppRoutes() {
                    element={!user ? <Login onLoginSuccess={handleLoginSuccess}/> : <Navigate to="/dashboard"/>}/>
             <Route path="/register"
                    element={!user ? <Register onLoginSuccess={handleLoginSuccess}/> : <Navigate to="/dashboard"/>}/>
+
             <Route path="/" element={user ? <Navigate to="/dashboard"/> : <Navigate to="/login"/>}/>
+
             <Route path="/dashboard"
                    element={user ? <AppLayout><Dashboard user={user}/></AppLayout> : <Navigate to="/login"/>}/>
             <Route path="/assessment"
