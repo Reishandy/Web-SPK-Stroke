@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { api } from '../services/api';
 import { User, ModelType, PredictionInput, PredictionResponse, BinaryOption } from '../types';
-import { Card, Button, Input, Badge } from '../components/ui';
+import { Card, Button, Input } from '../components/ui';
 import { useNavigate, Link } from 'react-router-dom';
 import { AlertCircle, CheckCircle, ChevronRight, Activity, Settings } from 'lucide-react';
+import { RecommendationSection } from '../components/Recommendations';
 
 interface AssessmentProps {
   user: User | null;
@@ -139,6 +140,8 @@ export const Assessment: React.FC<AssessmentProps> = ({ user }) => {
             <Button onClick={() => navigate('/dashboard')}>Back to Dashboard</Button>
           </div>
         </div>
+
+        <RecommendationSection isHighRisk={result.prediction_score === 1} />
       </div>
     );
   }

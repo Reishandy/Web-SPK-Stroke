@@ -4,6 +4,7 @@ import { HistoryItem, HistoryDetail } from '../types';
 import { Card, Badge, Button } from '../components/ui';
 import { ChevronLeft, Calendar, Brain } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { RecommendationSection } from '../components/Recommendations';
 
 export const HistoryList: React.FC = () => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -139,6 +140,8 @@ export const HistoryDetailView: React.FC = () => {
            })}
         </div>
       </Card>
+
+      <RecommendationSection isHighRisk={detail.prediction_score === 1} />
     </div>
   );
 };
